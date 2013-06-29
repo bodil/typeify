@@ -58,8 +58,8 @@ function compile(file) {
 }
 
 function transformRequires(src) {
-  return src.replace(/require\(['"]([^'"]*)['"]\)/g, function(x, y) {
-    return "require('" + y + ".ts')";
+  return src.replace(/^\s*var (\w+) = require\(['"]([^'"]+)['"]\);$/gm, function(x, i, f) {
+    return "var " + i + " = require('" + f + ".ts');";
   });
 }
 
