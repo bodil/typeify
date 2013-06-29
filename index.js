@@ -55,6 +55,7 @@ function compile(file) {
   host.arguments.push(file);
   batch.batchCompile();
   fileMap = batch.resolvedEnvironment.inputFileNameToOutputFileName;
+  return batch.errorReporter.hasErrors;
 }
 
 function transformRequires(src) {
@@ -64,11 +65,21 @@ function transformRequires(src) {
 }
 
 module.exports = function(file) {
-  var tsFile = tsify(file), jsFile, mapFile, original, data, mapData, sourceMap;
+  var tsFile = tsify(file), jsFile, mapFile, original, data, mapData, sourceMap,
+      compileErrors = false;
 
   if (uncompiled) {
-    compile(tsFile);
+    compileErrors = compile(tsFile);
     uncompiled = false;
+  }
+
+  if (compileErrors) {
+    return through(
+      function() {},
+      function() {
+        this.emit("error", "TypeScript compilation failed.");
+      }
+    );
   }
 
   jsFile = jsify(file);
