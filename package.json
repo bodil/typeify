@@ -1,0 +1,30 @@
+{
+  "name": "typeify",
+  "version": "0.1.0",
+  "description": "Browserify transform for TypeScript compilation",
+  "author": {
+    "name": "Bodil Stokke",
+    "email": "bodil@bodil.org",
+    "url": "http://bodil.org"
+  },
+  "license": "Apache 2",
+  "homepage": "https://github.com/bodil/typeify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bodil/typeify.git"
+  },
+  "bugs": "https://github.com/bodil/typeify/issues",
+  "keywords": [
+    "browserify",
+    "typescript"
+  ],
+  "dependencies": {
+    "convert-source-map": "~0.2.5",
+    "through": "~2.3.4",
+    "temp": "~0.5.0"
+  },
+  "devDependencies": {
+    "browserify": "~2.22.0"
+  },
+  "main": "index.js"
+}
